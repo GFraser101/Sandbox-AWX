@@ -3,7 +3,7 @@ Install AWX onto the Dell NSE Sandbox lab
 
 Because of download limits, you will need a Docker Hub account
 
-Go to https://hub.docker.com/ to create if needed.
+Go to https://hub.docker.com/ to create an account if needed.
 ![image](https://user-images.githubusercontent.com/16183399/158133591-60b78b9b-9772-4c4d-9950-39dafa2ba16c.png)
 
 
@@ -24,7 +24,7 @@ Once you are setup with a docker hub account
 
 4. Run the install script.   <code>./Sandbox-AWX/awx-install.sh</code>
 
-This may take some time and you should be prompted for your Docker Hub credentials
+This may take some time and at some point you should be prompted for your Docker Hub credentials.
 
 
 ![image](https://user-images.githubusercontent.com/16183399/158135048-0482604c-9e43-4e99-9574-b332ce4688c5.png)
@@ -32,4 +32,9 @@ This may take some time and you should be prompted for your Docker Hub credentia
 
 5. From the Sandbox console Web Browser login to AWX server. <code>http://192.168.1.238:8080</code> 
 
+User = admin
+
+Password = (same as console password)
+
 ![image](https://user-images.githubusercontent.com/16183399/158139142-d2226336-3c87-429a-b73a-390e433e8e6d.png)
+
