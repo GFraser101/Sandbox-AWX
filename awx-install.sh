@@ -15,16 +15,27 @@ echo You may be prompted for sudo password as well as docker lab user-id & passw
 
 echo Most script results are redirected to awx-install.log
 
-echo 
+sudo echo 
 
 # Clean up from any previous script runs
 
+# Remove previous log file
 if [ -e ./awx-install.log ]
 then	
 	rm awx-install.log
 fi
 
+# Remove cached docker hub credentials
+if [ -e /root/..docker/config.json ]
+then 
+	sudo rm /root/..docker/config.json
+fi	
 
+# Remove AWX repository
+if [ -e ./awx ]
+then
+	sudo rm -r awx
+fi
 
 # Docker hub login 
 
@@ -141,11 +152,6 @@ echo --- >> awx-install.log
 echo >> awx-install.log
 
 echo Git clone awx ansible install...
-
-if [ -e ./awx ]
-then
-	sudo rm -r awx
-fi
 
 if sudo git clone -b 17.0.1 https://github.com/ansible/awx.git >> awx-install.log; then
 
