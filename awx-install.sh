@@ -26,7 +26,7 @@ then
 fi
 
 # Remove cached docker hub credentials
-if [ -e /root/..docker/config.json ]
+if [ -e /root/.docker/config.json ]
 then 
 	sudo rm /root/..docker/config.json
 fi	
