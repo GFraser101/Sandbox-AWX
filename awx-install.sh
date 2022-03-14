@@ -17,7 +17,10 @@ echo Script results are redirected to awx-install.log
 
 echo 
 
-rm awx-install.log
+if [ -e ./awx-install.log ]
+then	
+	rm awx-install.log
+fi
 
 # Linux Update
 
