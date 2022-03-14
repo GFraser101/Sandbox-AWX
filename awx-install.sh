@@ -115,6 +115,12 @@ echo --- >> awx-install.log
 echo >> awx-install.log
 
 echo Git clone awx ansible install...
+
+if [ -e ./awx ]
+then
+	sudo rm -r awx
+fi
+
 if sudo git clone -b 17.0.1 https://github.com/ansible/awx.git >> awx-install.log; then
 
 	echo  Success
@@ -220,7 +226,7 @@ echo --- >> awx-install.log
 echo >> awx-install.log
 
 echo Run awx install playbook.  This may take some time...
-if ansible-playbook -i ./awx/installer/inventory ./awx/installer/install.yml; then
+if sudo ansible-playbook -i ./awx/installer/inventory ./awx/installer/install.yml; then
 
         echo  Success
 
