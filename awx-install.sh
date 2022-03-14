@@ -46,6 +46,7 @@ then
 	echo Remove previous install log
 	if rm awx-install.log >> awx-install.log
 		echo Success
+		
 	else 
 		echo Error - See awx-install.log for information
 		exit
@@ -58,10 +59,14 @@ then
 	echo Remove cached docker hub credentials
 	if sudo rm /root/.docker/config.json >> awx-install.log
 		echo Success
+		
 	else 
+		
 		echo Error - See awx-install.log for information
 		exit
+		
 	fi
+	
 fi	
 
 # Remove AWX clone
@@ -71,9 +76,12 @@ then
 	if sudo rm -r awx >> awx-install.log
 		echo Success
 	else
+		
 		echo Error - See awx-install.log for information
 		exit
-	fi	
+		
+	fi
+	
 fi
 
 # Linux Update
