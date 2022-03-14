@@ -11,31 +11,11 @@ clear
 
 echo Installation script for AWX into the NSE sandbox
 
-echo You may be prompted for sudo password as well as docker lab user-id & password
+echo You may be prompted for sudo password as well as docker lab user-id and password
 
 echo Most script results are redirected to awx-install.log
 
 sudo echo 
-
-# Clean up from any previous script runs
-
-# Remove previous log file
-if [ -e ./awx-install.log ]
-then	
-	rm awx-install.log
-fi
-
-# Remove cached docker hub credentials
-if [ -e /root/.docker/config.json ]
-then 
-	sudo rm /root/..docker/config.json
-fi	
-
-# Remove AWX repository
-if [ -e ./awx ]
-then
-	sudo rm -r awx
-fi
 
 # Docker hub login 
 
@@ -58,6 +38,43 @@ else
 
 fi
 
+# Clean up from any previous script runs
+
+# Remove previous log file
+if [ -e ./awx-install.log ]
+then	
+	echo Remove previous install log
+	if rm awx-install.log >> awx-install.log
+		echo Success
+	else 
+		echo Error - See awx-install.log for information
+		exit
+	fi
+fi
+
+# Remove cached docker hub credentials
+if [ -e /root/.docker/config.json ]
+then 
+	echo Remove cached docker hub credentials
+	if sudo rm /root/.docker/config.json >> awx-install.log
+		echo Success
+	else 
+		echo Error - See awx-install.log for information
+		exit
+	fi
+fi	
+
+# Remove AWX clone
+if [ -e ./awx ]
+then
+	echo Remove previous AWX clone 
+	if sudo rm -r awx >> awx-install.log
+		echo Success
+	else
+		echo Error - See awx-install.log for information
+		exit
+	fi	
+fi
 
 # Linux Update
 
