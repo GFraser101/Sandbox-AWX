@@ -3,7 +3,7 @@
 # Installation script for AWX into the NSE sandbox environment.
 # Install is for the existing sandbox ansible server.
 # Installs AWX 17.0.1 (NB: install process was changed for AWX 18.0.0 and up)
-# Requires a docker hub User ID or will most likely fail due to hub download limits
+# Requires a docker hub User ID due to hub download limits
 #
 # Greg Fraser greg.fraser@dell.com
 
@@ -11,16 +11,42 @@ clear
 
 echo Installation script for AWX into the NSE sandbox
 
-echo You may be prompted for sudo password
+echo You may be prompted for sudo password as well as docker lab user-id & password
 
-echo Script results are redirected to awx-install.log
+echo Most script results are redirected to awx-install.log
 
 echo 
+
+# Clean up from any previous script runs
 
 if [ -e ./awx-install.log ]
 then	
 	rm awx-install.log
 fi
+
+
+
+# Docker hub login 
+
+echo >> awx-install.log
+echo --- >> awx-install.log
+echo Docker hub login >> awx-install.log
+echo --- >> awx-install.log
+echo >> awx-install.log
+
+echo Docker hub login...
+if sudo docker login; then
+
+        echo  Success
+
+else
+
+        echo  Error - See awx-install.log for information
+
+        exit
+
+fi
+
 
 # Linux Update
 
@@ -185,27 +211,6 @@ echo >> awx-install.log
 
 echo Edit inventory file - set awx create_preload_data...
 if sudo sed -i -e 's/.*create_preload_data=.*/create_preload_data=false/' ./awx/installer/inventory >> awx-install.log; then
-
-        echo  Success
-
-else
-
-        echo  Error - See awx-install.log for information
-
-        exit
-
-fi
-
-# Docker hub login 
-
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Docker hub login >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
-
-echo Docker hub login...
-if sudo docker login; then
 
         echo  Success
 
