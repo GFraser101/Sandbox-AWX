@@ -1,7 +1,7 @@
 # Sandbox-AWX
-Install AWX onto the Dell NSE Sandbox lab
+Install AWX container onto the Dell NSE Sandbox lab
 
-Because of download limits, you will need a Docker Hub account
+Because of docker hub anonymous download limits, you will need a Docker Hub account to succesffully install.
 
 Go to https://hub.docker.com/ to create an account if needed.
 ![image](https://user-images.githubusercontent.com/16183399/158133591-60b78b9b-9772-4c4d-9950-39dafa2ba16c.png)
