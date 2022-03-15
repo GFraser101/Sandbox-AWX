@@ -177,7 +177,7 @@ else
 fi
 
 # Edit inventory file - set awx create_preload_data=false
-echo -e "\n\nEdit inventory file - set awx create_preload_data..." | tee -a awx-install.log
+echo -e "\n\nEdit inventory file - set awx create_preload_data=false..." | tee -a awx-install.log
 
 if sudo sed -i -e 's/.*create_preload_data=.*/create_preload_data=false/' ./awx/installer/inventory | tee -a awx-install.log > /dev/null; then
 
@@ -207,7 +207,7 @@ else
 fi
 
 # Run awx install playbook
-echo -e "\n\nRun awx install playbook.  This may take some time..." | tee -a awx-install.log
+echo -e "\n\nRun awx install playbook.  This may take some time (20mins)..." | tee -a awx-install.log
 
 if sudo ansible-playbook -i ./awx/installer/inventory ./awx/installer/install.yml | tee -a awx-install.log > /dev/null; then
 
