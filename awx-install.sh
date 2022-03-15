@@ -15,12 +15,18 @@ clear
 
 echo -e "Installation script for AWX into the NSE sandbox"
 
-echo -e "You may be prompted for sudo password as well as docker lab user-id and password"
+echo -e "You may be prompted for sudo password as well as docker hub user-id and password"
 
 echo -e "Most script results are redirected to awx-install.log"
 
 # Get sudo password
 sudo echo 
+
+# Get Docker Hub user info
+
+echo -e "\n\nCEnter login information for Dcoker Hub..." | tee -a awx-install.log
+read -p "UserID:" DH_USER
+read -sp "Password:" DH_PASS
 
 # Clean up from any previous script runs
 
@@ -69,9 +75,9 @@ fi
 
 echo -e "\n\nDocker hub login..." | tee -a awx-install.log
 
-if sudo docker login; then
+if sudo docker login -u $DH_USER -p $DH_PASS | tee -a awx-install.log; then
 
-        echo -e ""
+        echo -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
