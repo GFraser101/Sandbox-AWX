@@ -7,6 +7,10 @@
 #
 # Greg Fraser greg.fraser@dell.com
 
+# Variables
+TASK_SUCCESS="Success"
+TASK_ERROR="Error - See awx-install.log for information"
+
 clear
 
 echo -e "Installation script for AWX into the NSE sandbox"
@@ -28,9 +32,9 @@ then
 	echo -e "Remove previous install log..." | tee -a awx-install.log
 	if rm awx-install.log | tee -a awx-install.log
 	then
-		echo Success		
+		echo -e $TASK_SUCCESS | tee -a awx-install.log	
 	else 
-		echo Error - See awx-install.log for information
+		echo -e $TASK_ERROR
 		exit
 	fi
 fi
@@ -41,9 +45,9 @@ then
 	echo -e "Remove cached docker hub credentials..." | tee -a awx-install.log
 	if sudo rm /root/.docker/config.json | tee -a awx-install.log
 	then
-		echo Success		
+		echo -e $TASK_SUCCESS | tee -a awx-install.log	
 	else 
-		echo Error - See awx-install.log for information
+		echo -e $TASK_ERROR
 		exit
 	fi
 fi	
@@ -54,24 +58,24 @@ then
 	echo -e "Remove previous AWX clone..." | tee -a awx-install.log
 	if sudo rm -r awx | tee -a awx-install.log > /dev/null
 	then
-		echo Success
+		echo -e $TASK_SUCCESS | tee -a awx-install.log
 	else
-		echo Error - See awx-install.log for information
+		echo -e $TASK_ERROR
 		exit
 	fi
 fi
 
 # Docker hub login 
 
-echo -e "\n\n--- Docker hub login..." | tee -a awx-install.log
+echo -e "\n\nDocker hub login..." | tee -a awx-install.log
 
 if sudo docker login; then
 
-        echo  Success
+        echo -e "\n"
 
 else
 
-        echo  Error - See awx-install.log for information
+        echo  -e $TASK_ERROR
 
         exit
 
@@ -80,15 +84,15 @@ fi
 
 # Linux Update
 
-echo -e "\n\n--- Linux update..." | tee -a awx-install.log
+echo -e "\n\nLinux update..." | tee -a awx-install.log
 
 if sudo apt-get update | tee -a awx-install.log > /dev/null; then
 
-	echo Success
+	echo -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
-	echo Error - See awx-install.log for information 
+	echo -e $TASK_ERROR
 
 	exit
 
@@ -96,15 +100,15 @@ fi
 
 # Install Docker
 
-echo -e "\n\n--- Install Docker..." | tee -a awx-install.log
+echo -e "\n\nInstall Docker..." | tee -a awx-install.log
 
 if sudo apt-get install docker docker.io -y | tee -a awx-install.log > /dev/null; then
 
-	echo  Success
+	echo  -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
-	echo  Error - See awx-install.log for information
+	echo  -e $TASK_ERROR
 
 	exit
 
@@ -112,15 +116,15 @@ fi
 
 # Install Docker Compose
 
-echo -e "\n\n--- Install Docker compose..." | tee -a awx-install.log
+echo -e "\n\nInstall Docker compose..." | tee -a awx-install.log
 
 if sudo pip3 install docker-compose | tee -a awx-install.log > /dev/null; then
 
-	echo  Success
+	echo  -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
-	echo  Error - See awx-install.log for information
+	echo  -e $TASK_ERROR
 
 	exit
 
@@ -128,15 +132,15 @@ fi
 
 # Set docker user access
 
-echo -e "\n\n--- Set Docker user access..." | tee -a awx-install.log
+echo -e "\n\nSet Docker user access..." | tee -a awx-install.log
 
 if sudo usermod -aG docker $USER | tee -a awx-install.log > /dev/null; then
 
-	echo  Success
+	echo  -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
-	echo  Error - See awx-install.log for information
+	echo  -e $TASK_ERROR
 
 	exit
 
@@ -144,15 +148,15 @@ fi
 
 # Git clone awx ansible install
 
-echo -e "\n\n--- Git clone awx ansible install..." | tee -a awx-install.log
+echo -e "\n\nGit clone awx ansible install..." | tee -a awx-install.log
 
-if sudo git clone -b 17.0.1 https://github.com/ansible/awx.git | tee -a awx-install.log > /dev/null; then
+if sudo git clone -b --progress 17.0.1 https://github.com/ansible/awx.git &>> awx-install.log; then
 
-	echo  Success
+	echo  -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
-	echo  Error - See awx-install.log for information
+	echo  -e $TASK_ERROR
 
 	exit
 
@@ -160,15 +164,15 @@ fi
 
 # Edit inventory file - set awx host_port=8080
 
-echo -e "\n\n--- Edit inventory file - set awx host_port=8080..." | tee -a awx-install.log
+echo -e "\n\nEdit inventory file - set awx host_port=8080..." | tee -a awx-install.log
 
 if sudo sed -i -e 's/.*host_port=.*/host_port=8080/' ./awx/installer/inventory | tee -a awx-install.log > /dev/null; then
 
-        echo  Success
+        echo  -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
-        echo  Error - See awx-install.log for information
+        echo  -e $TASK_ERROR
 
         exit
 
@@ -176,15 +180,15 @@ fi
 
 # Edit inventory file - set awx admin_password
 
-echo -e "\n\n--- Edit inventory file - set awx admin_password..." | tee -a awx-install.log
+echo -e "\n\nEdit inventory file - set awx admin_password..." | tee -a awx-install.log
 
 if sudo sed -i -e 's/.*admin_password=.*/admin_password=Password123!/' ./awx/installer/inventory | tee -a awx-install.log > /dev/null; then
 
-        echo  Success
+        echo  -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
-        echo  Error - See awx-install.log for information
+        echo  -e $TASK_ERROR
 
         exit
 
@@ -192,15 +196,15 @@ fi
 
 # Edit inventory file - set awx create_preload_data=false
 
-echo -e "\n\n--- Edit inventory file - set awx create_preload_data..." | tee -a awx-install.log
+echo -e "\n\nEdit inventory file - set awx create_preload_data..." | tee -a awx-install.log
 
 if sudo sed -i -e 's/.*create_preload_data=.*/create_preload_data=false/' ./awx/installer/inventory | tee -a awx-install.log > /dev/null; then
 
-        echo  Success
+        echo  -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
-        echo  Error - See awx-install.log for information
+        echo  -e $TASK_ERROR
 
         exit
 
@@ -208,15 +212,15 @@ fi
 
 # Run awx install playbook
 
-echo -e "\n\n--- Run awx install playbook.  This may take some time...\" | tee -a awx-install.log
+echo -e "\n\nRun awx install playbook.  This may take some time..." | tee -a awx-install.log
 
 if sudo ansible-playbook -i ./awx/installer/inventory ./awx/installer/install.yml | tee -a awx-install.log > /dev/null; then
 
-        echo  Success
+        echo  -e $TASK_SUCCESS | tee -a awx-install.log
 
 else
 
-        echo  Error - See awx-install.log for information
+        echo  -e $TASK_ERROR
 
         exit
 
@@ -224,6 +228,6 @@ fi
 
 # Install  succeeded
 
-echo -e "\n\n--- Success. AWX installed...\n---\n" | tee -a awx-install.log
+echo -e "\n\nSuccess. AWX installed..." | tee -a awx-install.log
 
-echo -e "\n\n--- From the web browser connect to http://192.168.1.238:8080" | tee -a awx-install.log
+echo -e "\n\nFrom the web browser connect to http://192.168.1.238:8080" | tee -a awx-install.log
