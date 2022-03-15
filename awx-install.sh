@@ -220,7 +220,7 @@ fi
 
 # Run awx install playbook
 NOW=$(date "$DATE_FORMAT")
-echo -e "\n\n$NOW - Run awx install playbook.  This may take some time (20mins)..." | tee -a awx-install.log
+echo -e "\n\n$NOW - Run awx install playbook.\nThis may take some time (20mins)..." | tee -a awx-install.log
 
 if sudo ansible-playbook -i ./awx/installer/inventory ./awx/installer/install.yml | tee -a awx-install.log > /dev/null; then
 
