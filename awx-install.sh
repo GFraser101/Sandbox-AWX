@@ -13,7 +13,7 @@ TASK_ERROR="Error - See awx-install.log for information"
 
 clear
 
-echo -e "Installation script for AWX into the NSE sandbox"
+echo -e "Installation script for AWX into the NSE sandbox ansible server"
 echo -e "You may be prompted for sudo password as well as docker hub user-id and password"
 echo -e "Most script results are redirected to awx-install.log"
 
@@ -82,6 +82,8 @@ else
 
 fi
 
+# Run install tasks
+echo -e "\n\nRunning installation tasks..." | tee -a awx-install.log
 
 # Linux Update
 echo -e "\n\nLinux update..." | tee -a awx-install.log
