@@ -32,15 +32,19 @@ This may take some time and at some point you should be prompted for your Docker
 
 
 ![image](https://user-images.githubusercontent.com/16183399/158135048-0482604c-9e43-4e99-9574-b332ce4688c5.png)
+![image](https://user-images.githubusercontent.com/16183399/158321502-c77275b5-0f34-4ba5-bab3-d8bed16561a9.png)
 
 
-5. From the Sandbox console Web Browser login to AWX server. 
+
+5. Once the installation has completed allow a few minutes for the container to spin up.
+    
+6. From the Sandbox console Web Browser login to AWX server. 
 
     <code>http://192.168.1.238:8080</code> 
 
-User = admin
+    User = admin
 
-Password = (same as console password)
+    Password = (same as console password)
 
 ![image](https://user-images.githubusercontent.com/16183399/158139142-d2226336-3c87-429a-b73a-390e433e8e6d.png)
 
