@@ -19,6 +19,12 @@ sudo echo
 
 # Clean up from any previous script runs
 
+echo >> awx-install.log
+echo --- >> awx-install.log
+echo Clean up from any previous script runs >> awx-install.log
+echo --- >> awx-install.log
+echo >> awx-install.log
+
 # Remove previous log file
 if sudo test -a "./awx-install.log"
 then
