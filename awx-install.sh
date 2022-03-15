@@ -24,7 +24,7 @@ sudo echo
 
 # Clean up from any previous script runs
 
-echo -e "\n\n--- Clean up from any previous script runs..." | tee -a awx-install.log
+echo -e "\n\nClean up from any previous script runs..." | tee -a awx-install.log
 
 # Remove previous log file
 if sudo test -a "./awx-install.log"
@@ -71,7 +71,7 @@ echo -e "\n\nDocker hub login..." | tee -a awx-install.log
 
 if sudo docker login; then
 
-        echo -e "\n"
+        echo -e ""
 
 else
 
@@ -150,7 +150,7 @@ fi
 
 echo -e "\n\nGit clone awx ansible install..." | tee -a awx-install.log
 
-if sudo git clone -b --progress 17.0.1 https://github.com/ansible/awx.git &>> awx-install.log; then
+if sudo git clone --progress -b  17.0.1 https://github.com/ansible/awx.git &>> awx-install.log; then
 
 	echo  -e $TASK_SUCCESS | tee -a awx-install.log
 
