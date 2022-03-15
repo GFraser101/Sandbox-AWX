@@ -19,17 +19,13 @@ sudo echo
 
 # Clean up from any previous script runs
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Clean up from any previous script runs >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nClean up from any previous script runs...\n---\n" | tee -a awx-install.log
 
 # Remove previous log file
 if sudo test -a "./awx-install.log"
 then
 	echo Remove previous install log
-	if rm awx-install.log >> awx-install.log
+	if rm awx-install.log | tee -a awx-install.log
 	then
 		echo Success		
 	else 
@@ -42,7 +38,7 @@ fi
 if sudo test -a "/root/.docker/config.json"
 then
 	echo Remove cached docker hub credentials
-	if sudo rm /root/.docker/config.json >> awx-install.log
+	if sudo rm /root/.docker/config.json | tee -a awx-install.log
 	then
 		echo Success		
 	else 
@@ -55,7 +51,7 @@ fi
 if sudo test -a "./awx"
 then
 	echo Remove previous AWX clone 
-	if sudo rm -r awx >> awx-install.log
+	if sudo rm -r awx | tee -a awx-install.log > /dev/null
 	then
 		echo Success
 	else
@@ -66,13 +62,8 @@ fi
 
 # Docker hub login 
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Docker hub login >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nDocker hub login...\n---\n" | tee -a awx-install.log
 
-echo Docker hub login...
 if sudo docker login; then
 
         echo  Success
@@ -88,14 +79,9 @@ fi
 
 # Linux Update
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Linux Update >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nLinux update...\n---\n" | tee -a awx-install.log
 
-echo Linux update ...
-if sudo apt-get update >> awx-install.log; then
+if sudo apt-get update | tee -a awx-install.log > /dev/null; then
 
 	echo Success
 
@@ -109,14 +95,9 @@ fi
 
 # Install Docker
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Install docker >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nInstall Docker...\n---\n" | tee -a awx-install.log
 
-echo Install docker ...
-if sudo apt-get install docker docker.io -y >> awx-install.log; then
+if sudo apt-get install docker docker.io -y | tee -a awx-install.log > /dev/null; then
 
 	echo  Success
 
@@ -130,14 +111,9 @@ fi
 
 # Install Docker Compose
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Install docker-compose >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nInstall Docker compose...\n---\n" | tee -a awx-install.log
 
-echo Install docker-compose...
-if sudo pip3 install docker-compose >> awx-install.log; then
+if sudo pip3 install docker-compose | tee -a awx-install.log > /dev/null; then
 
 	echo  Success
 
@@ -151,14 +127,9 @@ fi
 
 # Set docker user access
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Set docker user access >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nSet Docker user access...\n---\n" | tee -a awx-install.log
 
-echo Set docker user access...
-if sudo usermod -aG docker $USER >> awx-install.log; then
+if sudo usermod -aG docker $USER | tee -a awx-install.log > /dev/null; then
 
 	echo  Success
 
@@ -172,15 +143,9 @@ fi
 
 # Git clone awx ansible install
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Git clone awx ansible install >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nGit clone awx ansible install...\n---\n" | tee -a awx-install.log
 
-echo Git clone awx ansible install...
-
-if sudo git clone -b 17.0.1 https://github.com/ansible/awx.git >> awx-install.log; then
+if sudo git clone -b 17.0.1 https://github.com/ansible/awx.git | tee -a awx-install.log > /dev/null; then
 
 	echo  Success
 
@@ -194,14 +159,9 @@ fi
 
 # Edit inventory file - set awx host_port=8080
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Edit inventory file - set awx host_port=8080 >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nEdit inventory file - set awx host_port=8080...\n---\n" | tee -a awx-install.log
 
-echo Edit inventory file - set awx host_port=8080...
-if sudo sed -i -e 's/.*host_port=.*/host_port=8080/' ./awx/installer/inventory >> awx-install.log; then
+if sudo sed -i -e 's/.*host_port=.*/host_port=8080/' ./awx/installer/inventory | tee -a awx-install.log > /dev/null; then
 
         echo  Success
 
@@ -215,14 +175,9 @@ fi
 
 # Edit inventory file - set awx admin_password
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Edit inventory file - set awx admin_password >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nEdit inventory file - set awx admin_password...\n---\n" | tee -a awx-install.log
 
-echo Edit inventory file - set awx admin_password...
-if sudo sed -i -e 's/.*admin_password=.*/admin_password=Password123!/' ./awx/installer/inventory >> awx-install.log; then
+if sudo sed -i -e 's/.*admin_password=.*/admin_password=Password123!/' ./awx/installer/inventory | tee -a awx-install.log > /dev/null; then
 
         echo  Success
 
@@ -236,14 +191,9 @@ fi
 
 # Edit inventory file - set awx create_preload_data=false
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Edit inventory file - set awx create_preload_data=falsed >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nEdit inventory file - set awx create_preload_data...\n---\n" | tee -a awx-install.log
 
-echo Edit inventory file - set awx create_preload_data...
-if sudo sed -i -e 's/.*create_preload_data=.*/create_preload_data=false/' ./awx/installer/inventory >> awx-install.log; then
+if sudo sed -i -e 's/.*create_preload_data=.*/create_preload_data=false/' ./awx/installer/inventory | tee -a awx-install.log > /dev/null; then
 
         echo  Success
 
@@ -257,14 +207,9 @@ fi
 
 # Run awx install playbook
 
-echo >> awx-install.log
-echo --- >> awx-install.log
-echo Run awx install playbook >> awx-install.log
-echo --- >> awx-install.log
-echo >> awx-install.log
+echo -e "\n---\nRun awx install playbook.  This may take some time...\n---\n" | tee -a awx-install.log
 
-echo Run awx install playbook.  This may take some time...
-if sudo ansible-playbook -i ./awx/installer/inventory ./awx/installer/install.yml; then
+if sudo ansible-playbook -i ./awx/installer/inventory ./awx/installer/install.yml | tee -a awx-install.log > /dev/null; then
 
         echo  Success
 
@@ -278,5 +223,6 @@ fi
 
 # Install  succeeded
 
-echo AWX installed.
-echo From the web browser connect to http://192.168.1.238:8080
+echo -e "\n---\nSuccess. AWX installed...\n---\n" | tee -a awx-install.log
+
+echo -e "\n---\nFrom the web browser connect to http://192.168.1.238:8080\n---\n" | tee -a awx-install.log
