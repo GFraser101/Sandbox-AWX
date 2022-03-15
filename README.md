@@ -17,7 +17,8 @@ Once you are setup with a docker hub account
 ![image](https://user-images.githubusercontent.com/16183399/158134334-029e5b46-8d04-4e74-88c4-9d8c29225731.png)
 
 
-5. From the Ansible console clone to the Sandbox Ansible server. <code>git clone https://github.com/GFraser101/Sandbox-AWX.git</code>
+5. From the Ansible console clone to the Sandbox Ansible server. 
+<code>git clone https://github.com/GFraser101/Sandbox-AWX.git</code>
 
 
 ![image](https://user-images.githubusercontent.com/16183399/158134574-b6dca161-35c7-4fa3-9b89-b0e999e94199.png)
