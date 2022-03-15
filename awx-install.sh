@@ -24,7 +24,7 @@ sudo echo
 
 # Get Docker Hub user info
 
-echo -e "\n\nCEnter login information for Dcoker Hub..." | tee -a awx-install.log
+echo -e "\n\nEnter login information for Docker Hub..." | tee -a awx-install.log
 read -p "UserID:" DH_USER
 read -sp "Password:" DH_PASS
 
@@ -75,7 +75,7 @@ fi
 
 echo -e "\n\nDocker hub login..." | tee -a awx-install.log
 
-if sudo docker login -u $DH_USER -p $DH_PASS | tee -a awx-install.log; then
+if sudo docker login -u $DH_USER -p $DH_PASS &>> awx-install.log; then
 
         echo -e $TASK_SUCCESS | tee -a awx-install.log
 
