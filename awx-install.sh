@@ -25,6 +25,21 @@ echo -e "\n\nEnter login information for Docker Hub..." | tee -a awx-install.log
 read -p "UserID:" DH_USER
 read -sp "Password:" DH_PASS
 
+# Docker hub login 
+echo -e "\n\nDocker hub login..." | tee -a awx-install.log
+
+if sudo docker login -u $DH_USER -p $DH_PASS &>> awx-install.log; then
+
+        echo -e $TASK_SUCCESS | tee -a awx-install.log
+
+else
+
+        echo  -e $TASK_ERROR
+
+        exit
+
+fi
+
 # Clean up from any previous script runs
 echo -e "\n\nClean up from any previous script runs..." | tee -a awx-install.log
 
@@ -67,20 +82,6 @@ then
 	fi
 fi
 
-# Docker hub login 
-echo -e "\n\nDocker hub login..." | tee -a awx-install.log
-
-if sudo docker login -u $DH_USER -p $DH_PASS &>> awx-install.log; then
-
-        echo -e $TASK_SUCCESS | tee -a awx-install.log
-
-else
-
-        echo  -e $TASK_ERROR
-
-        exit
-
-fi
 
 # Run install tasks
 echo -e "\n\nRunning installation tasks..." | tee -a awx-install.log
