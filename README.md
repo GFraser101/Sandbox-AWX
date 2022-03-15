@@ -13,17 +13,20 @@ Once you are setup with a docker hub account
 ![image](https://user-images.githubusercontent.com/16183399/158134021-12344cf3-e4bd-49d7-86e4-434210ed808e.png)
 
 
-3. Open Sandbox X-Server app and connect the Ansible Server
+2. Open Sandbox X-Server app and connect the Ansible Server
 ![image](https://user-images.githubusercontent.com/16183399/158134334-029e5b46-8d04-4e74-88c4-9d8c29225731.png)
 
 
-5. From the Ansible console clone to the Sandbox Ansible server. 
-<code>git clone https://github.com/GFraser101/Sandbox-AWX.git</code>
+3. From the Ansible console clone to the Sandbox Ansible server. 
+
+    <code>git clone https://github.com/GFraser101/Sandbox-AWX.git</code>
 
 
 ![image](https://user-images.githubusercontent.com/16183399/158134574-b6dca161-35c7-4fa3-9b89-b0e999e94199.png)
 
-4. Run the install script.   <code>./Sandbox-AWX/awx-install.sh</code>
+4. Run the install script.   
+    
+    <code>./Sandbox-AWX/awx-install.sh</code>
 
 This may take some time and at some point you should be prompted for your Docker Hub credentials.
 
@@ -31,7 +34,9 @@ This may take some time and at some point you should be prompted for your Docker
 ![image](https://user-images.githubusercontent.com/16183399/158135048-0482604c-9e43-4e99-9574-b332ce4688c5.png)
 
 
-5. From the Sandbox console Web Browser login to AWX server. <code>http://192.168.1.238:8080</code> 
+5. From the Sandbox console Web Browser login to AWX server. 
+
+    <code>http://192.168.1.238:8080</code> 
 
 User = admin
 
