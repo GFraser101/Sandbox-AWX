@@ -1,6 +1,13 @@
 # Sandbox-AWX
 Install AWX container onto the Dell NSE Sandbox lab
 
+At the completion of this install, AWX login will be avialable at
+    <code>http://192.168.1.238:8080</code> 
+
+    User = admin
+
+    Password = (same as console password)
+    
 Because of docker hub anonymous download limits, you will need a Docker Hub account to succesffully install.
 
 Go to https://hub.docker.com/ to create an account if needed.
