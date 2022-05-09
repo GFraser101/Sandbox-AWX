@@ -35,7 +35,8 @@ Once you are setup with a docker hub account
     
     <code>./Sandbox-AWX/awx-install.sh</code>
 
-This may take some time and at some point you should be prompted for your Docker Hub credentials.
+This may take some time and at some point you may be prompted for local sudo password. Check lab user guide for this.
+You will also be prompted for your Docker Hub credentials.
 
 
 ![image](https://user-images.githubusercontent.com/16183399/158135048-0482604c-9e43-4e99-9574-b332ce4688c5.png)
